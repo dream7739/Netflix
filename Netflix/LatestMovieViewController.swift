@@ -59,6 +59,9 @@ class LatestMovieViewController: UIViewController {
         
     }
     
+    @IBAction func dismissKeyboard(_ sender: UITapGestureRecognizer) {
+        view.endEditing(true)
+    }
     
     @IBAction func searchTextFieldEnterClicked(_ sender: Any) {
         print("키보드 내려주세요")
@@ -67,98 +70,69 @@ class LatestMovieViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
+        
         //네비게이션바 타이틀 변경
-        navigationItem.title = "NEW & HOT 검색"
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white,
-            .font : UIFont.boldSystemFont(ofSize: 20)]
+        designNavigationBar(titleText: "NEW & HOT 검색")
         
         //텍스트필드 설정
-        searchTextField.placeholder = "게임, 시리즈, 영화를 검색하세요..."
-        searchTextField.keyboardType = .default
-        searchTextField.tintColor = .lightGray
+        designTextField(searchTextField, placeholderText: "게임, 시리즈, 영화를 검색하세요...")
+        
+        //공개 예정 버튼 설정
+        designButton(releaseButton, titleText: "공개예정", buttonImage: "blue", tintColor: .white, cornerValue: 20)
+        
+        //모두의 인기 콘텐츠 버튼 설정
+        designButton(popularContentButton, titleText: "모두의 인기 콘텐츠", buttonImage: "turquoise", tintColor: .white, cornerValue: 18)
+        
+        //TOP10 시리즈 버튼 설정
+        designButton(top10SeriesButton, titleText: "TOP 10 시리즈", buttonImage: "pink", tintColor: .white, cornerValue: 18)
+        
+        //버튼 클릭 시 변경되는 메인멘트 레이블
+        designLabel(searchResultMainLabel, labelText: "이런! 찾으시는 작품이 없습니다!", textColor: .white, alignmentAttribute: .center, fontAttribute: .boldSystemFont(ofSize: 25))
+        
+        //버튼 클릭 시 변경되는 서브멘트 레이블
+        designLabel(searchResultSubLabel, labelText: "다른 영화, 배우, 장르를 검색해보세요", textColor: .white, alignmentAttribute: .center, fontAttribute: .boldSystemFont(ofSize: 13))
+    }
+    
+    fileprivate func designNavigationBar(titleText: String){
+        navigationItem.title = titleText
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white,
+                                                                   .font : UIFont.boldSystemFont(ofSize: 20)]
+    }
+
+    fileprivate func designTextField(_ sender: UITextField, placeholderText: String){
+        sender.placeholder = placeholderText
+        sender.keyboardType = .default
+        sender.tintColor = .lightGray
         
         let leftImage = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         leftImage.image = UIImage(systemName: "magnifyingglass")
-        searchTextField.leftView = leftImage
-        searchTextField.leftViewMode = .always
-        
-        //공개 예정 버튼 설정
-        
-        /**==================수업내용==================== **/
-        //tint color - 텍스트필드 커서 깜빡거릴 때 색 변경 등
-        //애플의 글로벌 tint color는 파란색
-        //아래 코드는 defualt만 버튼 스타일 상 존재하지 않는 것(default)
-        //Image Rendering Mode : template vs original
-        //original: 원본 이미지, template: 형태만 따와지는 형태
-        
-        //releaseButton.titleLabel?.font = .boldSystemFont(ofSize: 30)
-        
-        //여기에서만 오리지널 이미지이기 때문에 다른 곳에서는 옵션 지정 해주어야 함
-        //무조건 오리지널 이미지로 보여야 하는 것일 때는 asset - render as original
-        let image = UIImage(named: "blue")?.withRenderingMode(.alwaysOriginal)
-        releaseButton.setImage(image, for: .normal)
-        
-        //면과 선을 따서 색을 넣어줘야 한다 - template image
-        let image2 = UIImage(systemName: "star")
-        releaseButton.setImage(image2, for: .normal)
-        
-        /**===================================================== **/
-        
-        releaseButton.setImage(UIImage(named: "blue"), for: .normal)
-        releaseButton.tintColor = .white
-        releaseButton.layer.cornerRadius = 20
-        releaseButton.setTitle("공개예정", for: .normal)
-        releaseButton.configuration?.imagePadding = 3
-        releaseButton.configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer {
-            incoming in
-            var outgoing = incoming
-            outgoing.font = UIFont.systemFont(ofSize: 11)
-            return outgoing
-        }
-        
-        //모두의 인기 콘텐츠 버튼 설정
-        popularContentButton.setImage(UIImage(named: "turquoise"), for: .normal)
-        popularContentButton.tintColor = .white
-        popularContentButton.layer.cornerRadius = 18
-        popularContentButton.setTitle("모두의 인기 콘텐츠", for: .normal)
-        popularContentButton.configuration?.imagePadding = 3
-        popularContentButton.configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer {
-            incoming in
-            var outgoing = incoming
-            outgoing.font = UIFont.systemFont(ofSize: 11)
-            return outgoing
-        }
-        
-        //TOP10 시리즈 버튼 설정
-        top10SeriesButton.setImage(UIImage(named: "pink"), for: .normal)
-        top10SeriesButton.tintColor = .white
-        top10SeriesButton.layer.cornerRadius = 18
-        
-        top10SeriesButton.setTitle("TOP 10 시리즈", for: .normal)
-        top10SeriesButton.configuration?.imagePadding = 3
-        top10SeriesButton.configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer {
-            incoming in
-            var outgoing = incoming
-            outgoing.font = UIFont.systemFont(ofSize: 11)
-            return outgoing
-        }
-        
-        //버튼 클릭 시 변경되는 메인멘트 레이블
-        searchResultMainLabel.textColor = .white
-        searchResultMainLabel.font = .boldSystemFont(ofSize: 25)
-        searchResultMainLabel.textAlignment = .center
-        searchResultMainLabel.text = "이런! 찾으시는 작품이 없습니다!"
-        
-        //버튼 클릭 시 변경되는 서브멘트 레이블
-        searchResultSubLabel.textColor = .white
-        searchResultSubLabel.font = .boldSystemFont(ofSize: 13)
-        searchResultSubLabel.textAlignment = .center
-        searchResultSubLabel.text = "다른 영화, 배우, 장르를 검색해보세요"
-
-        
-        
+        sender.leftView = leftImage
+        sender.leftViewMode = .always
     }
     
+    fileprivate func designButton(_ sender: UIButton, titleText: String, buttonImage: String,  tintColor: UIColor, cornerValue: CGFloat){
+        sender.setTitle(titleText, for: .normal)
+        sender.setImage(UIImage(named: buttonImage), for: .normal)
+        sender.tintColor = tintColor
+        sender.layer.cornerRadius = cornerValue
+        
+        sender.configuration?.imagePadding = 3
+        sender.configuration?.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer {
+            incoming in
+            var outgoing = incoming
+            outgoing.font = UIFont.systemFont(ofSize: 11)
+            return outgoing
+        }
+    }
+    
+    
+    fileprivate func designLabel(_ sender: UILabel, labelText: String, textColor: UIColor, alignmentAttribute:  NSTextAlignment, fontAttribute: UIFont){
+        sender.text = labelText
+        sender.textAlignment = alignmentAttribute
+        sender.textColor = textColor
+        sender.font = fontAttribute
+        
+    }
 
    
 
