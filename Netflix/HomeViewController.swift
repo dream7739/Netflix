@@ -142,6 +142,6 @@ class HomeViewController: UIViewController {
         sender.setImage(UIImage(named: buttonImage), for: .normal)
         sender.backgroundColor = buttonColor
         sender.tintColor = tintColor
-        sender.layer.cornerRadius = 5
+        sender.layer.cornerRadius = cornerValue
     }
 }
