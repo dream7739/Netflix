@@ -492,6 +492,10 @@
                         <outlet property="posterImageView" destination="Ex9-oh-LCy" id="FxA-jy-XcZ"/>
                         <outlet property="recommandTagLabel" destination="Eiv-fK-Rhf" id="JXj-zO-3Az"/>
                         <outlet property="top10BadgeImageView" destination="XOg-vw-AHC" id="Uu8-oS-bBd"/>
+                        <outletCollection property="hotContentImageList" destination="Ex9-oh-LCy" collectionClass="NSMutableArray" id="CkB-WE-8n8"/>
+                        <outletCollection property="hotContentImageList" destination="hZP-lf-KuK" collectionClass="NSMutableArray" id="0Sd-4d-HkD"/>
+                        <outletCollection property="hotContentImageList" destination="qVn-Lu-oDo" collectionClass="NSMutableArray" id="cMM-GF-biv"/>
+                        <outletCollection property="hotContentImageList" destination="cnI-Oa-jez" collectionClass="NSMutableArray" id="Yp6-qM-WHn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gtW-yD-dYT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -594,7 +598,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

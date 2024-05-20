@@ -19,51 +19,26 @@ class HomeViewController: UIViewController {
     @IBOutlet var hotContentImageView2: UIImageView!
     @IBOutlet var hotContentImageView3: UIImageView!
     
+    //outletcollection 사용
+    @IBOutlet var hotContentImageList: [UIImageView]!
+    
     @IBOutlet var netflixLogoImageView: UIImageView!
     @IBOutlet var top10BadgeImageView: UIImageView!
     @IBOutlet var newEpisodeLabel: UILabel!
     @IBOutlet var directPlayLabel: UILabel!
     @IBOutlet var newSeriesLabel: UILabel!
     
-    let imageArray = ["극한직업", "노량", "더퍼스트슬램덩크", "도둑들", "베테랑", "아바타", "암살", "서울의봄", "스즈메의문단속", "신과함께죄와벌", "범죄도시3", "어벤져스엔드게임", "왕의남자", "육사오", "해운대", "부산행", "밀수"]
-    
-    @IBAction func playButtonClicked(_ sender: UIButton) {
-        //4개의 포스터 이미지 변경
-        var shuffledImage: [String] = []
-        
-        shuffledImage.append(imageArray.randomElement()!)
-        
-        while shuffledImage.count < 4 {
-            var randomImage = imageArray.randomElement()!
-            if !shuffledImage.contains(randomImage){
-                shuffledImage.append(randomImage)
-            }
-        }
-        
-        posterImageView.image = UIImage(named: shuffledImage[0])
-        hotContentImageView1.image = UIImage(named: shuffledImage[1])
-        hotContentImageView2.image = UIImage(named: shuffledImage[2])
-        hotContentImageView3.image = UIImage(named: shuffledImage[3])
-        
-        //지금 뜨는 컨텐츠 하단 넷플릭스 로고 등 이미지 랜덤 변경
-        var shuffledBadge: [Bool] = []
-        for _ in 0...4 {
-            shuffledBadge.append(Bool.random())
-        }
-        netflixLogoImageView.isHidden = shuffledBadge[0]
-        top10BadgeImageView.isHidden = shuffledBadge[1]
-        newEpisodeLabel.isHidden = shuffledBadge[2]
-        directPlayLabel.isHidden = shuffledBadge[3]
-        newSeriesLabel.isHidden = shuffledBadge[4]
-
-    }
+    private let imageArray = ["극한직업", "노량", "더퍼스트슬램덩크",
+                              "도둑들", "베테랑", "아바타", "암살",
+                              "서울의봄", "스즈메의문단속", "신과함께죄와벌",
+                              "범죄도시3", "어벤져스엔드게임", "왕의남자",
+                              "육사오", "해운대", "부산행", "밀수"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = .black
 
-        //네비게이션바 타이틀 변경
         navigationItem.title = "홍정민님"
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white,
             .font : UIFont.boldSystemFont(ofSize: 20)]
@@ -140,6 +115,38 @@ class HomeViewController: UIViewController {
         newSeriesLabel.clipsToBounds = true
         newSeriesLabel.textAlignment = .center
         newSeriesLabel.font = .boldSystemFont(ofSize: 14)
+    }
+    
+    //재생 버튼 클릭 시 4개의 포스터 이미지 변경
+    @IBAction func playButtonClicked(_ sender: UIButton) {
+        var shuffledImage: [String] = []
+        
+        shuffledImage.append(imageArray.randomElement()!)
+        
+        while shuffledImage.count < 4 {
+            var randomImage = imageArray.randomElement()!
+            if !shuffledImage.contains(randomImage){
+                shuffledImage.append(randomImage)
+            }
+        }
+        
+        //재생 버튼 클릭 시 포스터 이미지 변경
+        for i in 0...3 {
+            hotContentImageList[i].image = UIImage(named: shuffledImage[i])
+        }
+        
+        //지금 뜨는 컨텐츠 하단 넷플릭스 로고 등 이미지 랜덤 변경
+        var shuffledBadge: [Bool] = []
+        for _ in 0...4 {
+            shuffledBadge.append(Bool.random())
+        }
+        
+        netflixLogoImageView.isHidden = shuffledBadge[0]
+        top10BadgeImageView.isHidden = shuffledBadge[1]
+        newEpisodeLabel.isHidden = shuffledBadge[2]
+        directPlayLabel.isHidden = shuffledBadge[3]
+        newSeriesLabel.isHidden = shuffledBadge[4]
+
     }
     
     
