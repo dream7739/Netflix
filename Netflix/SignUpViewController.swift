@@ -24,11 +24,12 @@ class SignUpViewController: UIViewController {
         
         if (emailTextField.text?.isEmpty ?? false) ||
             (passwordTextField.text?.isEmpty ?? false) {
-            effectivenessLabel.text = "이메일과 비밀번호는 필수항목입니다"
+            presentAlert("이메일과 비밀번호는 필수항목입니다")
         }else if (passwordTextField.text?.count ?? 0 < 6){
-            effectivenessLabel.text = "비밀번호는 6자리 이상이어야 합니다."
+            presentAlert("비밀번호는 6자리 이상이어야 합니다")
         }else{
-            effectivenessLabel.text = "회원가입 성공!"
+ 
+            presentAlert("\(getCurrentTime()) 회원가입 성공")
         }
     }
     
@@ -65,7 +66,14 @@ class SignUpViewController: UIViewController {
     }
     
     
-    fileprivate func designTextField(_ sender : UITextField, placeholderText: String){
+    private func getCurrentTime() -> String {
+        let locale = Locale(identifier: "ko-KR")
+        let date = Date()
+        let result = date.formatted(.dateTime.locale(locale).day().month(.twoDigits).year().hour(.twoDigits(amPM: .abbreviated)).minute(.twoDigits))
+        return result
+    }
+    
+    private func designTextField(_ sender : UITextField, placeholderText: String){
         sender.backgroundColor = .darkGray
         sender.tintColor = .white
         sender.textColor = .white
@@ -82,7 +90,7 @@ class SignUpViewController: UIViewController {
         
     }
     
-    fileprivate func designButton(_ sender: UIButton, titleText: String, buttonColor: UIColor, tintColor: UIColor, cornerValue: CGFloat){
+    private func designButton(_ sender: UIButton, titleText: String, buttonColor: UIColor, tintColor: UIColor, cornerValue: CGFloat){
         sender.setTitle(titleText, for: .normal)
         sender.backgroundColor = buttonColor
         sender.tintColor = tintColor
@@ -90,14 +98,21 @@ class SignUpViewController: UIViewController {
     }
     
     
-    fileprivate func designSwitch(_ sender: UISwitch, onColor: UIColor, thumbColor: UIColor){
+    private func designSwitch(_ sender: UISwitch, onColor: UIColor, thumbColor: UIColor){
         sender.onTintColor = .systemPink //켰을 때 컬러
         sender.thumbTintColor = .lightGray //동그라미 컬러
     }
     
-    fileprivate func designLabel(_ sender: UILabel, labelText: String, textColor: UIColor, fontAttribute: UIFont){
+    private func designLabel(_ sender: UILabel, labelText: String, textColor: UIColor, fontAttribute: UIFont){
         sender.text = labelText
         sender.textColor = textColor
         sender.font = fontAttribute
+    }
+    
+    private func presentAlert(_ text: String){
+        let alert = UIAlertController(title: "알림", message: text, preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "확인", style: .default)
+        alert.addAction(confirmAction)
+        present(alert, animated: true)
     }
 }
