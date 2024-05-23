@@ -41,13 +41,13 @@ class StoredMovieViewController: UIViewController {
         designButton(storeAvailableButton, titleText: "저장 가능한 콘텐츠 살펴보기", buttonColor: .white, tintColor: .black, cornerValue: 5)
     }
     
-    fileprivate func designNavigationBar(titleText: String){
+    private func designNavigationBar(titleText: String){
         navigationItem.title = titleText
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white,
                                                                    .font : UIFont.boldSystemFont(ofSize: 20)]
     }
     
-    fileprivate func designLabel(_ sender: UILabel, labelText: String, textColor: UIColor, alignmentAttribute:  NSTextAlignment, fontAttribute: UIFont){
+    private func designLabel(_ sender: UILabel, labelText: String, textColor: UIColor, alignmentAttribute:  NSTextAlignment, fontAttribute: UIFont){
         sender.text = labelText
         sender.textAlignment = alignmentAttribute
         sender.textColor = textColor
@@ -55,12 +55,12 @@ class StoredMovieViewController: UIViewController {
         sender.numberOfLines = 0
     }
     
-    fileprivate func designImageView(_ sender: UIImageView, imageName: String){
+    private func designImageView(_ sender: UIImageView, imageName: String){
         sender.image = UIImage(named: imageName)
         sender.contentMode = .scaleAspectFill
     }
     
-    fileprivate func designButton(_ sender: UIButton, titleText: String, buttonColor: UIColor, tintColor: UIColor, cornerValue: CGFloat){
+    private func designButton(_ sender: UIButton, titleText: String, buttonColor: UIColor, tintColor: UIColor, cornerValue: CGFloat){
         sender.setTitle(titleText, for: .normal)
         sender.backgroundColor = buttonColor
         sender.tintColor = tintColor

@@ -108,19 +108,19 @@ class HomeViewController: UIViewController {
         
     }
     
-    fileprivate func designNavigationBar(titleText: String){
+    private func designNavigationBar(titleText: String){
         navigationItem.title = titleText
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white,
                                                                    .font : UIFont.boldSystemFont(ofSize: 20)]
     }
     
-    fileprivate func designImageView(_ sender: UIImageView, imageName: String, cornerValue: CGFloat){
+    private func designImageView(_ sender: UIImageView, imageName: String, cornerValue: CGFloat){
         sender.image = UIImage(named: imageName)
         sender.contentMode = .scaleAspectFill
         sender.layer.cornerRadius = cornerValue
     }
     
-    fileprivate func designLabel(_ sender: UILabel, labelText: String, textColor: UIColor, alignmentAttribute:  NSTextAlignment, fontAttribute: UIFont){
+    private func designLabel(_ sender: UILabel, labelText: String, textColor: UIColor, alignmentAttribute:  NSTextAlignment, fontAttribute: UIFont){
         sender.text = labelText
         sender.textAlignment = alignmentAttribute
         sender.textColor = textColor
@@ -137,7 +137,7 @@ class HomeViewController: UIViewController {
         }
     }
 
-    fileprivate func designButton(_ sender: UIButton, titleText: String, buttonImage: String, buttonColor: UIColor, tintColor: UIColor, cornerValue: CGFloat){
+    private func designButton(_ sender: UIButton, titleText: String, buttonImage: String, buttonColor: UIColor, tintColor: UIColor, cornerValue: CGFloat){
         sender.setTitle(titleText, for: .normal)
         sender.setImage(UIImage(named: buttonImage), for: .normal)
         sender.backgroundColor = buttonColor

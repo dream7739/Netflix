@@ -93,13 +93,13 @@ class LatestMovieViewController: UIViewController {
         designLabel(searchResultSubLabel, labelText: "다른 영화, 배우, 장르를 검색해보세요", textColor: .white, alignmentAttribute: .center, fontAttribute: .boldSystemFont(ofSize: 13))
     }
     
-    fileprivate func designNavigationBar(titleText: String){
+    private func designNavigationBar(titleText: String){
         navigationItem.title = titleText
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white,
                                                                    .font : UIFont.boldSystemFont(ofSize: 20)]
     }
 
-    fileprivate func designTextField(_ sender: UITextField, placeholderText: String){
+    private func designTextField(_ sender: UITextField, placeholderText: String){
         sender.placeholder = placeholderText
         sender.keyboardType = .default
         sender.tintColor = .lightGray
@@ -110,7 +110,7 @@ class LatestMovieViewController: UIViewController {
         sender.leftViewMode = .always
     }
     
-    fileprivate func designButton(_ sender: UIButton, titleText: String, buttonImage: String,  tintColor: UIColor, cornerValue: CGFloat){
+    private func designButton(_ sender: UIButton, titleText: String, buttonImage: String,  tintColor: UIColor, cornerValue: CGFloat){
         sender.setTitle(titleText, for: .normal)
         sender.setImage(UIImage(named: buttonImage), for: .normal)
         sender.tintColor = tintColor
@@ -126,7 +126,7 @@ class LatestMovieViewController: UIViewController {
     }
     
     
-    fileprivate func designLabel(_ sender: UILabel, labelText: String, textColor: UIColor, alignmentAttribute:  NSTextAlignment, fontAttribute: UIFont){
+    private func designLabel(_ sender: UILabel, labelText: String, textColor: UIColor, alignmentAttribute:  NSTextAlignment, fontAttribute: UIFont){
         sender.text = labelText
         sender.textAlignment = alignmentAttribute
         sender.textColor = textColor
